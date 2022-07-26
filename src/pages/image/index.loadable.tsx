@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-import { ImageArea } from '../../features/Image';
+import { ImageArea } from '../../features/image';
 
 const Image = (): JSX.Element => (
   <>

@@ -6,13 +6,25 @@ const isDevelopment = currentEnv === 'development';
 const ignoredPropNames = `^(${['Window'].join('|')})$`;
 
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es6: true,
     jest: true,
     node: true,
   },
-  plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react'],
+  globals: {
+    createSerializer: true,
+    global: true,
+    globalThis: true,
+    mount: true,
+    mountToJson: true,
+    render: true,
+    renderToJson: true,
+    shallow: true,
+    shallowToJson: true,
+  },
+  plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -27,32 +39,35 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   ignorePatterns: ['.eslintrc.js'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src'],
+      },
+    },
+    react: {
+      version: 'detect',
+    },
+  },
   overrides: [
     /*
-      <-------------CONFIG FILES------------->
+      <-------------TS, TSX, COMMON RULES------------->
     */
     {
-      files: ['jest.config.ts', 'jest.e2e.config.ts'],
-      rules: {
-        'import/no-default-export': 'off',
+      files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: 'tsconfig.eslint.json',
+        sourceType: 'module',
+        tsconfigRootDir: __dirname,
       },
-    },
-    /*
-      <-------------JSON FILES------------->
-    */
-    {
-      files: ['**/**/*.json'],
       rules: {
-        '@typescript-eslint/no-unused-expressions': 'off',
-        'prettier/prettier': 'off',
-      },
-    },
-    /*
-      <-------------JS, JSX, TS, TSX FILES, COMMON------------->
-    */
-    {
-      files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
-      rules: {
+        'no-plusplus': 'off',
+        'no-return-await': 'off',
         camelcase: ['error', { properties: 'always' }],
         'class-methods-use-this': 'off',
         'no-await-in-loop': 'off',
@@ -76,6 +91,39 @@ module.exports = {
           },
         ],
 
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-unused-vars': isDevelopment
+          ? 'off'
+          : [
+              'error',
+              {
+                vars: 'all',
+                args: 'after-used',
+                ignoreRestSiblings: false,
+              },
+            ],
+        '@typescript-eslint/explicit-function-return-type': 'warn',
+        '@typescript-eslint/return-await': 'off',
+        '@typescript-eslint/no-empty-interface': [
+          'error',
+          {
+            allowSingleExtends: true,
+          },
+        ],
+        '@typescript-eslint/naming-convention': [
+          'error',
+          {
+            filter: {
+              match: false,
+              regex: ignoredPropNames,
+            },
+            format: ['UPPER_CASE', 'StrictPascalCase'],
+            prefix: ['I'],
+            selector: 'interface',
+          },
+        ],
+        '@typescript-eslint/ban-ts-comment': isDevelopment ? 'off' : 'error',
+
         'sort-keys-fix/sort-keys-fix': 'warn',
 
         'import/order': [
@@ -97,7 +145,7 @@ module.exports = {
         ],
         'import/prefer-default-export': 'off',
         'import/no-default-export': 'error',
-        'import/no-unresolved': 'error',
+        'import/no-unresolved': ['error', { caseSensitiveStrict: true }],
 
         'unicorn/custom-error-definition': 'error',
         'unicorn/empty-brace-spaces': 'error',
@@ -112,10 +160,17 @@ module.exports = {
         'unicorn/prefer-keyboard-event-key': 'error',
         'unicorn/prefer-node-protocol': 'error',
         'unicorn/throw-new-error': 'error',
+
+        'check-file/folder-naming-convention': [
+          'error',
+          {
+            'src/**/': 'KEBAB_CASE',
+          },
+        ],
       },
     },
     /*
-      <-------------REACT FILES------------->
+      <-------------REACT RULES------------->
     */
     {
       files: ['*.tsx', '*.jsx'],
@@ -129,62 +184,30 @@ module.exports = {
         ],
       },
     },
-    /*
-      <-------------TYPESCRIPT FILES------------->
-    */
     {
-      files: ['*.ts', '*.tsx'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        project: 'tsconfig.eslint.json',
-        sourceType: 'module',
-        tsconfigRootDir: __dirname,
-      },
+      files: ['*.tsx'],
       rules: {
-        'no-unused-vars': 'off',
-        '@typescript-eslint/ban-types': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'warn',
-        '@typescript-eslint/naming-convention': [
-          'error',
-          {
-            filter: {
-              match: false,
-              regex: ignoredPropNames,
-            },
-            format: ['UPPER_CASE', 'StrictPascalCase'],
-            prefix: ['I'],
-            selector: 'interface',
-          },
-        ],
-        '@typescript-eslint/no-empty-interface': [
-          'error',
-          {
-            allowSingleExtends: true,
-          },
-        ],
-        '@typescript-eslint/no-unused-vars': isDevelopment
-          ? 'off'
-          : [
-              'error',
-              {
-                vars: 'all',
-                args: 'after-used',
-                ignoreRestSiblings: false,
-              },
-            ],
-        '@typescript-eslint/return-await': 'off',
-        '@typescript-eslint/ban-ts-comment': isDevelopment ? 'off' : 'error',
+        'react/prop-types': 'off',
       },
     },
     /*
-      <-------------JS FILES------------->
+      <-------------JSON RULES------------->
     */
     {
-      files: ['*.js', '*.jsx'],
-      rules: {},
+      files: ['**/**/*.json'],
+      rules: {
+        '@typescript-eslint/no-unused-expressions': 'off',
+        'prettier/prettier': 'off',
+      },
+    },
+    /*
+      <-------------CONFIG FILES------------->
+    */
+    {
+      files: ['jest.config.ts', 'jest.e2e.config.ts'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
     },
     /*
       <-------------GLOBAL TYPES DECLARATION------------->
@@ -204,17 +227,14 @@ module.exports = {
         'import/no-default-export': 'off',
       },
     },
-  ],
-  root: true,
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        moduleDirectory: ['node_modules', 'src'],
+    /*
+      <-------------STORYBOOK COMPONENTS RULES------------->
+    */
+    {
+      files: ['**/*.stories.tsx'],
+      rules: {
+        'import/no-default-export': 'off',
       },
     },
-    react: {
-      version: 'detect',
-    },
-  },
+  ],
 };

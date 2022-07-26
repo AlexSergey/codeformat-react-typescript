@@ -1,4 +1,4 @@
-import { Navigation } from './components/Navigation';
+import { Navigation } from './components/navigation';
 import styles from './styles.module.scss';
 
 export const Index = ({ children }: { children: JSX.Element }): JSX.Element => (

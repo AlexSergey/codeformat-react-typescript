@@ -1,4 +1,4 @@
-import { Image } from '../../../../components/Image';
+import { Image } from '../../../../components/image';
 import { useImage } from '../../hooks';
 
 import styles from './styles.module.scss';
