@@ -4,11 +4,16 @@
     "outDir": "./dist/",
     "jsx": "react-jsx",
 
+    // Node.js 16
+    "module": "ESNext",
+    "target": "ES2021",
     "moduleResolution": "node",
     "esModuleInterop": true,
-
-    "module": "ESNext",
-    "target": "ES2020", // Node.js 14
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2021"
+    ],
 
     "sourceMap": true,
     "removeComments": false,
@@ -18,12 +23,6 @@
     "types": [
       "node",
       "webpack-env"
-    ],
-
-    "lib": [
-      "esnext",
-      "dom",
-      "ES2015.Iterable"
     ],
 
     "strict": true,

@@ -24,6 +24,7 @@ module.exports = {
     shallow: true,
     shallowToJson: true,
   },
+  ignorePatterns: ['.eslintrc.js', '.eslintrc.cjs'],
   plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file'],
   extends: [
     'eslint:recommended',
@@ -38,7 +39,6 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['.eslintrc.js'],
   settings: {
     'import/resolver': {
       node: {
