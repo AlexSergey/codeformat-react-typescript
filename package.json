@@ -16,6 +16,7 @@
     "format:scss": "stylelint \"src/**/*.scss\" --fix",
     "lint": "npm run lint:ts && npm run lint:code",
     "lint:code": "eslint --ext .ts,.tsx,.json src/",
+    "lint:commit": "commitlint -e",
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "lint:ts": "tsc --noEmit",
     "prepare": "husky install",
@@ -37,6 +38,8 @@
     "redux-thunk": "2.4.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@rockpack/compiler": "2.0.1",
     "@types/loadable__component": "5.13.4",
     "@types/node": "16.11.45",
@@ -44,6 +47,7 @@
     "@types/react-dom": "17.0.5",
     "@types/react-helmet": "6.1.5",
     "@types/webpack-env": "1.16.2",
+    "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
