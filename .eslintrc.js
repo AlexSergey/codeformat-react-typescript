@@ -243,5 +243,14 @@ module.exports = {
         'import/no-default-export': 'off',
       },
     },
+    /*
+      <-------------SPEC RULES------------->
+    */
+    {
+      files: ['**/*.spec.ts', '**/*.e2e-spec.ts'],
+      rules: {
+        'jest-formatting/padding-around-all': 'error',
+      },
+    },
   ],
 };
