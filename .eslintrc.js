@@ -25,7 +25,7 @@ module.exports = {
     shallowToJson: true,
   },
   ignorePatterns: ['.eslintrc.js', '.eslintrc.cjs'],
-  plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file'],
+  plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file', 'jest-formatting'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
