@@ -130,7 +130,7 @@ module.exports = {
         'import/no-extraneous-dependencies': [
           'error',
           {
-            devDependencies: ['**/*.test.js', '**/*.spec.js'],
+            devDependencies: ['**/*.test.ts', '**/*.spec.ts', '**/*.test.tsx', '**/*.spec.tsx', 'jest.*.ts'],
           },
         ],
         'import/order': [
