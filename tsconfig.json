@@ -5,15 +5,14 @@
     "jsx": "react-jsx",
 
     // Node.js 16
-    "module": "ESNext",
+    "lib": [
+      "es2021",
+      "dom"
+    ],
+    "module": "esnext",
     "target": "ES2021",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2021"
-    ],
 
     "sourceMap": true,
     "removeComments": false,
