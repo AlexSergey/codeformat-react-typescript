@@ -25,20 +25,6 @@ module.exports = {
     shallowToJson: true,
   },
   ignorePatterns: ['.eslintrc.js', '.eslintrc.cjs'],
-  plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file', 'jest-formatting'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'airbnb-base',
-    'airbnb-typescript/base',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'prettier',
-    'plugin:prettier/recommended',
-  ],
   settings: {
     'import/resolver': {
       node: {
@@ -65,6 +51,20 @@ module.exports = {
         sourceType: 'module',
         tsconfigRootDir: __dirname,
       },
+      plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file', 'jest-formatting'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
+        'airbnb-base',
+        'airbnb-typescript/base',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
+        'prettier',
+        'plugin:prettier/recommended',
+      ],
       rules: {
         'no-unused-vars': 'off',
         'no-plusplus': 'off',
