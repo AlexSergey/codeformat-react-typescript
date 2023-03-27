@@ -41,7 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@rockpack/compiler": "2.0.1",
+    "@rockpack/compiler": "3.1.0",
     "@types/loadable__component": "5.13.4",
     "@types/node": "16.11.45",
     "@types/react": "17.0.8",
