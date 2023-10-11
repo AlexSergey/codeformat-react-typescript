@@ -26,6 +26,7 @@ We can set up our IDE to fix all lint rules and format code by Prettier.
 4. Find Prettier.
 
 - Set Prettier path
+- Add "css,scss,less" extensions
 - Select "On Reformat code action", "On save"
 
 ### VSCode
