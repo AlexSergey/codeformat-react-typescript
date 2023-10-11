@@ -1,4 +1,3 @@
-import './types/global.declaration';
 import { createBrowserHistory } from 'history';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,6 +6,7 @@ import { App } from './app';
 import { Router } from './components/router';
 import { createServices } from './services';
 import { createStore } from './store';
+import './types/global.declaration';
 
 const history = createBrowserHistory();
 

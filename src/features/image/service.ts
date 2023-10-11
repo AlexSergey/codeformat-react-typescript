@@ -1,8 +1,8 @@
 import { IFetch } from '../../types/fetch';
 
 export type ImageResType = {
-  id: string;
   avatar_url: string;
+  id: string;
 };
 
 export interface IImageService {

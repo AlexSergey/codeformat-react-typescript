@@ -1,9 +1,13 @@
+const fs = require('fs');
+
 const defaultEnv = 'production';
 const supportedEnvs = ['development', 'production'];
 const currentEnv = supportedEnvs.includes(process.env.NODE_ENV) ? process.env.NODE_ENV : defaultEnv;
 const isDevelopment = currentEnv === 'development';
 
 const ignoredPropNames = `^(${['Window'].join('|')})$`;
+
+const prettierConfig = JSON.parse(fs.readFileSync('./.prettierrc', 'utf8'));
 
 module.exports = {
   root: true,
@@ -36,6 +40,16 @@ module.exports = {
       version: 'detect',
     },
   },
+  // eslint-plugin-perfectionist conflicts
+  // https://github.com/azat-io/eslint-plugin-perfectionist#%EF%B8%8F-troubleshooting
+  rules: {
+    'react/jsx-sort-props': 'off',
+    'import/order': 'off',
+    'sort-imports': 'off',
+    'sort-keys': 'off',
+    '@typescript-eslint/adjacent-overload-signatures': 'off',
+    '@typescript-eslint/sort-type-constituents': 'off',
+  },
   overrides: [
     /*
       <-------------TS, TSX, COMMON RULES------------->
@@ -51,7 +65,7 @@ module.exports = {
         sourceType: 'module',
         tsconfigRootDir: __dirname,
       },
-      plugins: ['@typescript-eslint', 'import', 'unicorn', 'sort-keys-fix', 'react', 'check-file', 'jest-formatting'],
+      plugins: ['@typescript-eslint', 'import', 'unicorn', 'react', 'check-file', 'jest-formatting', 'perfectionist'],
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -64,6 +78,7 @@ module.exports = {
         'plugin:import/typescript',
         'prettier',
         'plugin:prettier/recommended',
+        'plugin:perfectionist/recommended-natural',
       ],
       rules: {
         'no-unused-vars': 'off',
@@ -79,18 +94,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'newline-before-return': 'error',
 
-        'prettier/prettier': [
-          'error',
-          {
-            bracketSpacing: true,
-            endOfLine: 'lf',
-            printWidth: 120,
-            semi: true,
-            singleQuote: true,
-            trailingComma: 'all',
-            useTabs: false,
-          },
-        ],
+        'prettier/prettier': ['error', prettierConfig],
 
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-unused-vars': isDevelopment
@@ -125,26 +129,7 @@ module.exports = {
         ],
         '@typescript-eslint/ban-ts-comment': isDevelopment ? 'off' : 'error',
 
-        'sort-keys-fix/sort-keys-fix': 'warn',
-
         'import/no-extraneous-dependencies': 'error',
-        'import/order': [
-          'error',
-          {
-            alphabetize: {
-              order: 'asc',
-            },
-            groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
-            'newlines-between': 'always',
-            pathGroups: [
-              {
-                group: 'internal',
-                pattern: '@',
-                position: 'after',
-              },
-            ],
-          },
-        ],
         'import/prefer-default-export': 'off',
         'import/no-default-export': 'error',
         'import/no-unresolved': ['error', { caseSensitiveStrict: true }],
