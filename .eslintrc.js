@@ -65,7 +65,16 @@ module.exports = {
         sourceType: 'module',
         tsconfigRootDir: __dirname,
       },
-      plugins: ['@typescript-eslint', 'import', 'unicorn', 'react', 'check-file', 'jest-formatting', 'perfectionist'],
+      plugins: [
+        '@typescript-eslint',
+        'import',
+        'unicorn',
+        'react',
+        'check-file',
+        'jest-formatting',
+        'perfectionist',
+        'regexp',
+      ],
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -79,6 +88,7 @@ module.exports = {
         'prettier',
         'plugin:prettier/recommended',
         'plugin:perfectionist/recommended-natural',
+        'plugin:regexp/recommended',
       ],
       rules: {
         'no-unused-vars': 'off',
@@ -93,6 +103,7 @@ module.exports = {
         'no-param-reassign': 'off',
         'no-underscore-dangle': 'off',
         'newline-before-return': 'error',
+        'no-warning-comments': 'warn',
 
         'prettier/prettier': ['error', prettierConfig],
 
