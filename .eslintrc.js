@@ -74,6 +74,7 @@ module.exports = {
         'jest-formatting',
         'perfectionist',
         'regexp',
+        'sonarjs',
       ],
       extends: [
         'eslint:recommended',
@@ -89,6 +90,7 @@ module.exports = {
         'plugin:prettier/recommended',
         'plugin:perfectionist/recommended-natural',
         'plugin:regexp/recommended',
+        'plugin:sonarjs/recommended',
       ],
       rules: {
         'no-unused-vars': 'off',
