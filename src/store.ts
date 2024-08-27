@@ -1,4 +1,4 @@
-import { Store, configureStore } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 
 import { imageReducer } from './features/image';
 import { IRootState, IStoreProps } from './types/store';

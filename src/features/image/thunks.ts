@@ -9,6 +9,8 @@ export const fetchImage =
       const { avatar_url: url } = await services.image.fetchImage();
       dispatch(requestImageSuccess({ url }));
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       dispatch(requestImageError());
     }
   };
