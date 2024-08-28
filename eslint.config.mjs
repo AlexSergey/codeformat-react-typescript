@@ -2,10 +2,9 @@ import tsParser from '@typescript-eslint/parser';
 import checkFile from 'eslint-plugin-check-file';
 import json from 'eslint-plugin-json';
 import perfectionist from 'eslint-plugin-perfectionist';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
 import * as regexpPlugin from 'eslint-plugin-regexp';
-import sonarjs from 'eslint-plugin-sonarjs';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import eslintTs from 'typescript-eslint';
@@ -59,7 +58,7 @@ const currentEnv = supportedEnvs.includes(process.env.NODE_ENV) ? process.env.NO
 const isDevelopment = currentEnv === 'development';
 
 const languageOptions = {
-  ecmaVersion: 2023,
+  ecmaVersion: 2024,
   globals: {
     ...globals.browser,
   },
@@ -154,6 +153,7 @@ const customTypescriptConfig = {
       },
     ],
     'react/jsx-uses-react': 'off',
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
 
     'unicorn/custom-error-definition': 'error',
@@ -185,10 +185,16 @@ export default [
   { ignores },
   reactPlugin.configs.flat.recommended,
   ...recommendedTypeScriptConfigs,
-  eslintPluginPrettierRecommended,
+  prettierRecommended,
   perfectionist.configs['recommended-natural'],
   regexpPlugin.configs['flat/recommended'],
-  sonarjs.configs.recommended,
   json.configs['recommended'],
   customTypescriptConfig,
+  {
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
 ];
