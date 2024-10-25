@@ -1,16 +1,16 @@
-import { IFetch } from '../../types/fetch';
+import { Fetch } from '../../types/fetch';
 
-export interface IImageResType {
+export interface ImageResType {
   avatar_url: string;
   id: string;
 }
 
-export interface IImageService {
-  fetchImage: () => Promise<IImageResType>;
+export interface ImageService {
+  fetchImage: () => Promise<ImageResType>;
 }
 
-export const imageService = (rest: IFetch): IImageService => ({
-  fetchImage: async (): Promise<IImageResType> => {
+export const imageService = (rest: Fetch): ImageService => ({
+  fetchImage: async (): Promise<ImageResType> => {
     const response = await rest('https://api.github.com/users/defunkt');
 
     return await response.json();

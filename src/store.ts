@@ -1,10 +1,10 @@
 import { configureStore, Store } from '@reduxjs/toolkit';
 
 import { imageReducer } from './features/image';
-import { IRootState, IStoreProps } from './types/store';
+import { RootState, StoreProps } from './types/store';
 import { isDevelopment } from './utils/environments';
 
-export const createStore = ({ history, initialState, services }: IStoreProps): Store<IRootState> =>
+export const createStore = ({ history, initialState, services }: StoreProps): Store<RootState> =>
   configureStore({
     devTools: isDevelopment(),
     middleware: (getDefaultMiddleware) =>

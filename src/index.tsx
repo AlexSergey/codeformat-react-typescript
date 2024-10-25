@@ -11,7 +11,6 @@ import './types/global.declaration';
 const history = createBrowserHistory();
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   interface Window {
     REDUX_DATA: Record<string, unknown>;
   }

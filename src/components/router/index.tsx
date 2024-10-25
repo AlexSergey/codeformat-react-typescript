@@ -2,13 +2,13 @@ import { History } from 'history';
 import { ReactElement, ReactNode, useLayoutEffect, useState } from 'react';
 import { Router as BaseRouter } from 'react-router-dom';
 
-interface IRouterProps {
+interface RouterProps {
   basename?: string;
   children: ReactNode;
   history: History;
 }
 
-export const Router = ({ basename, children, history }: IRouterProps): ReactElement => {
+export const Router = ({ basename, children, history }: RouterProps): ReactElement => {
   const [state, setState] = useState({
     action: history.action,
     location: history.location,
