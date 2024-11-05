@@ -52,11 +52,6 @@ const ignores = [
 ];
 const tsFiles = ['**/*.{ts,tsx}'];
 
-const defaultEnv = 'production';
-const supportedEnvs = ['development', 'production'];
-const currentEnv = supportedEnvs.includes(process.env.NODE_ENV) ? process.env.NODE_ENV : defaultEnv;
-const isDevelopment = currentEnv === 'development';
-
 const languageOptions = {
   ecmaVersion: 2024,
   globals: {
@@ -85,7 +80,7 @@ const customTypescriptConfig = {
     unicorn: eslintPluginUnicorn,
   },
   rules: {
-    '@typescript-eslint/ban-ts-comment': isDevelopment ? 'off' : 'error',
+    '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/naming-convention': [
@@ -109,16 +104,14 @@ const customTypescriptConfig = {
         allowSingleExtends: true,
       },
     ],
-    '@typescript-eslint/no-unused-vars': isDevelopment
-      ? 'off'
-      : [
-          'error',
-          {
-            args: 'after-used',
-            ignoreRestSiblings: false,
-            vars: 'all',
-          },
-        ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'after-used',
+        ignoreRestSiblings: false,
+        vars: 'all',
+      },
+    ],
     '@typescript-eslint/return-await': 'off',
 
     camelcase: ['error', { properties: 'always' }],
@@ -141,10 +134,10 @@ const customTypescriptConfig = {
 
     'class-methods-use-this': 'off',
     'newline-before-return': 'error',
-    'no-alert': isDevelopment ? 'off' : 'error',
+    'no-alert': 'error',
     'no-await-in-loop': 'off',
-    'no-console': isDevelopment ? 'off' : 'error',
-    'no-debugger': isDevelopment ? 'off' : 'error',
+    'no-console': 'error',
+    'no-debugger': 'error',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
     'no-return-await': 'off',
