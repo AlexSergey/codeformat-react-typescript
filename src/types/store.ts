@@ -7,15 +7,15 @@ import { ImageState } from './image';
 
 export type Dispatcher = ThunkDispatch<RootState, ThunkExtras, Action>;
 
-export interface ThunkExtras {
-  history: History;
-  services: Services;
+export interface RootState {
+  image: ImageState;
 }
 
 export interface StoreProps extends ThunkExtras {
   initialState?: Record<string, unknown>;
 }
 
-export interface RootState {
-  image: ImageState;
+export interface ThunkExtras {
+  history: History;
+  services: Services;
 }
