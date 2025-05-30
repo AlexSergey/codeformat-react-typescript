@@ -1,6 +1,6 @@
 import tsParser from '@typescript-eslint/parser';
 import checkFile from 'eslint-plugin-check-file';
-import json from 'eslint-plugin-json';
+import packageJson from 'eslint-plugin-package-json';
 import perfectionist from 'eslint-plugin-perfectionist';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
@@ -38,7 +38,6 @@ const ignores = [
   '*.txt',
   '*.mdx',
   '*.md',
-  '*.json',
   '*.ejs',
   '*.hbs',
   '*.jade',
@@ -173,12 +172,12 @@ const recommendedTypeScriptConfigs = [
 
 export default [
   { ignores },
+  packageJson.configs.recommended,
   reactPlugin.configs.flat.recommended,
   ...recommendedTypeScriptConfigs,
   prettierRecommended,
   perfectionist.configs['recommended-natural'],
   regexpPlugin.configs['flat/recommended'],
-  json.configs['recommended'],
   customTypescriptConfig,
   {
     settings: {
